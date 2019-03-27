@@ -1,0 +1,27 @@
+{
+  "name": "athena_group/mdm-wrapper",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Emanuel Righetto",
+      "email": "erighetto@athena.eu"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@bitbucket.org:athena_group/swaggerclient-php.git"
+    }
+  ],
+  "require": {
+    "athena_group/swaggerclient-php": "dev-master",
+    "symfony/dotenv": "^3.0 || ^4.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Athena\\": "src/"
+    },
+    "files": ["load.environment.php"]
+  }
+}
