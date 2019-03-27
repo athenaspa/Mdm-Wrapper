@@ -39,7 +39,6 @@ class MdmBase
 
     /**
      * MdmService constructor.
-     * @throws ApiException
      */
     public function __construct()
     {
@@ -104,12 +103,11 @@ class MdmBase
     }
 
     /**
-     * @throws ApiException
+     * Unset access token
      */
     protected function refreshClientAccessToken()
     {
         self::$accesToken = NULL;
-        $this->httpClient = $this->getHttpClient();
     }
 
     /**
