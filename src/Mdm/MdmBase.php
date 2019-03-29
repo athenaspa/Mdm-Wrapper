@@ -86,7 +86,7 @@ class MdmBase
      * @return HttpClient
      * @throws ApiException
      */
-    protected function getHttpClient()
+    public function getHttpClient()
     {
         $handlerStack = HandlerStack::create(new CurlHandler());
         $handlerStack->push(Middleware::retry($this->retryDecider()));
@@ -105,7 +105,7 @@ class MdmBase
     /**
      * Unset access token
      */
-    protected function refreshClientAccessToken()
+    private function refreshClientAccessToken()
     {
         self::$accesToken = NULL;
     }
