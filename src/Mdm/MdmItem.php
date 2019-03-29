@@ -59,6 +59,7 @@ class MdmItem extends MdmBase implements MdmInterface
         foreach ($result->getRows() as $item) {
             if ($item->getSku() == $sku) {
                 $mdm_item = $item;
+                break;
             }
         }
 
