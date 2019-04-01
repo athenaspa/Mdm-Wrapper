@@ -19,8 +19,8 @@ class MdmItem extends MdmBase implements MdmInterface
     const PAGINATION_MAX = 500;
 
     /**
-     * @return \Swagger\Client\Api\ItemApi
-     * @throws \Swagger\Client\ApiException
+     * @return ItemApi
+     * @throws ApiException
      */
     public function getMdmApi()
     {
@@ -53,7 +53,7 @@ class MdmItem extends MdmBase implements MdmInterface
             $updatedAfter = NULL,
             $start = '0',
             $limit = self::PAGINATION_MAX,
-            true
+            TRUE
         );
 
         foreach ($result->getRows() as $item) {
@@ -75,21 +75,21 @@ class MdmItem extends MdmBase implements MdmInterface
     {
         $result = $this->getMdmApi()->itemsGet(
             $language,
-            $sku = null,
-            $name = null,
-            $description = null,
-            $minPrice = null,
-            $maxPrice = null,
-            $tags = null,
-            $keywords = null,
-            $commercialFamily = null,
-            $createdBefore = null,
-            $createdAfter = null,
-            $updatedBefore = null,
-            $updatedAfter = null,
+            $sku = NULL,
+            $name = NULL,
+            $description = NULL,
+            $minPrice = NULL,
+            $maxPrice = NULL,
+            $tags = NULL,
+            $keywords = NULL,
+            $commercialFamily = NULL,
+            $createdBefore = NULL,
+            $createdAfter = NULL,
+            $updatedBefore = NULL,
+            $updatedAfter = NULL,
             $start = 0,
             $limit = self::PAGINATION_MAX,
-            true
+            TRUE
         );
 
         return [
@@ -102,28 +102,28 @@ class MdmItem extends MdmBase implements MdmInterface
     /**
      * @param $start
      * @param string $language
-     * @return \Swagger\Client\Model\Item[]
+     * @return Item[]
      * @throws ApiException
      */
     public function getAllItems($start, $language = 'it')
     {
         $result = $this->getMdmApi()->itemsGet(
             $language,
-            $sku = null,
-            $name = null,
-            $description = null,
-            $minPrice = null,
-            $maxPrice = null,
-            $tags = null,
-            $keywords = null,
-            $commercialFamily = null,
-            $createdBefore = null,
-            $createdAfter = null,
-            $updatedBefore = null,
-            $updatedAfter = null,
+            $sku = NULL,
+            $name = NULL,
+            $description = NULL,
+            $minPrice = NULL,
+            $maxPrice = NULL,
+            $tags = NULL,
+            $keywords = NULL,
+            $commercialFamily = NULL,
+            $createdBefore = NULL,
+            $createdAfter = NULL,
+            $updatedBefore = NULL,
+            $updatedAfter = NULL,
             $start,
             $limit = self::PAGINATION_MAX,
-            true
+            TRUE
         );
 
         return $result->getRows();
