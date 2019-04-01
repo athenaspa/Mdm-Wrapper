@@ -16,7 +16,7 @@ class MdmItem extends MdmBase implements MdmInterface
     /**
      * Pagination Limit
      */
-    protected $limit = 500;
+    const PAGINATION_MAX = 500;
 
     /**
      * @return \Swagger\Client\Api\ItemApi
@@ -52,7 +52,7 @@ class MdmItem extends MdmBase implements MdmInterface
             $updatedBefore = NULL,
             $updatedAfter = NULL,
             $start = '0',
-            $limit = $this->limit,
+            $limit = self::PAGINATION_MAX,
             true
         );
 
@@ -88,7 +88,7 @@ class MdmItem extends MdmBase implements MdmInterface
             $updatedBefore = null,
             $updatedAfter = null,
             $start = 0,
-            $limit = $this->limit,
+            $limit = self::PAGINATION_MAX,
             true
         );
 
@@ -122,7 +122,7 @@ class MdmItem extends MdmBase implements MdmInterface
             $updatedBefore = null,
             $updatedAfter = null,
             $start,
-            $limit = $this->limit,
+            $limit = self::PAGINATION_MAX,
             true
         );
 
