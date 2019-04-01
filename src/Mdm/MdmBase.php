@@ -137,7 +137,7 @@ class MdmBase
                     return true;
                 }
                 // received 401, so we need to refresh the token
-                if ($response->getStatusCode() === 401) {
+                if ($response->getStatusCode() == 401) {
                     $this->refreshClientAccessToken();
                     return true;
                 }
