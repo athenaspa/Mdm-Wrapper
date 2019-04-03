@@ -16,7 +16,8 @@
   "require": {
     "athena_group/swaggerclient-php": "dev-master",
     "symfony/dotenv": "^3.0 || ^4.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "caseyamcl/guzzle_retry_middleware": "^2.2"
   },
   "autoload": {
     "psr-4": {
