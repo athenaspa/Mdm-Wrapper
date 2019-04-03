@@ -84,7 +84,6 @@ class MdmBase
     private function refreshClientAccessToken()
     {
         self::$accessToken = NULL;
-        return $this;
     }
 
     /**
@@ -105,7 +104,9 @@ class MdmBase
                 ],
                 'max_retry_attempts' => self::MAX_RETRIES,
                 'retry_on_status' => [401, 500],
-                'on_retry_callback' => $this->refreshClientAccessToken()
+                'on_retry_callback' => $this->refreshClientAccessToken(),
+                'retry_on_timeout' => true,
+                'connect_timeout' => 20,
             ]
         );
     }
