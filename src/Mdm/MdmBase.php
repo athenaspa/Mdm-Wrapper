@@ -29,25 +29,12 @@ class MdmBase
     static $accessToken;
 
     /**
-     * @return Configuration
-     */
-    public function getConfig()
-    {
-        $config = new Configuration();
-        $config->setHost(getenv('HOST'));
-        return $config;
-    }
-
-    /**
      * @return string
      * @throws ApiException
      */
     public function getAccessToken()
     {
         if (empty(self::$accessToken)) {
-            $http_client = new HttpClient([
-                'base_uri' => getenv('HOST')
-            ]);
             $token_request = new TokenRequest();
             $token_request
                 ->setGrantType('password_grant')
@@ -56,7 +43,7 @@ class MdmBase
                 ->setEmail(getenv('EMAIL'))
                 ->setPassword(getenv('PASSWORD'));
 
-            $auth_instance = new AuthApi($http_client, $this->getConfig());
+            $auth_instance = new AuthApi(null, $this->getConfig());
             $token = $auth_instance->authTokenPost($token_request);
             self::$accessToken = $token->getAccessToken();
         }
@@ -73,6 +60,16 @@ class MdmBase
     }
 
     /**
+     * @return Configuration
+     */
+    public function getConfig()
+    {
+        $config = new Configuration();
+        $config->setHost(getenv('HOST'));
+        return $config;
+    }
+
+    /**
      * @return HttpClient
      * @throws ApiException
      */
@@ -83,7 +80,6 @@ class MdmBase
 
         return new HttpClient(
             [
-                'base_uri' => getenv('HOST'),
                 'handler' => $handlerStack,
                 'headers' => [
                     'Accept' => 'application/json',

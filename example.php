@@ -2,7 +2,10 @@
 
 require_once 'vendor/autoload.php';
 
+use Swagger\Client\ApiException;
 use Swagger\Client\Model\Asset;
+use Swagger\Client\Model\BrandModelYear;
+use Swagger\Client\Model\Item;
 
 /**
  * Wrapper Element
@@ -25,13 +28,13 @@ for ($i = $pagination['currentPage']; $i <= $totPages; $i++) {
 
     try {
         $items = $api->getAllItems($currentPage);
-    } catch (\Swagger\Client\ApiException $e) {
+    } catch (ApiException $e) {
         print $e->getMessage();
     }
 
     foreach ($items as $item) {
-        /** @var \Swagger\Client\Model\Item $item */
-        if ($item instanceof \Swagger\Client\Model\Item) {
+        /** @var Item $item */
+        if ($item instanceof Item) {
 
             print 'Sto processando item ' . $item->getSku() . "\n";
 
@@ -59,7 +62,7 @@ for ($i = $pagination['currentPage']; $i <= $totPages; $i++) {
  */
 $itemApi = $api->getMdmApi();
 
-/** @var \Swagger\Client\Model\BrandModelYear[] $associations */
+/** @var BrandModelYear[] $associations */
 $associations = $itemApi->associationsGet('P400485100058')->getRows();
 
 

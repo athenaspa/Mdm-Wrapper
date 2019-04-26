@@ -6,13 +6,25 @@
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Dotenv\Exception\PathException;
 use Composer\Autoload\ClassLoader;
+
 /**
  * Load the .env file. See /.env.dist.
  */
 $dotenv = new Dotenv();
+
 try {
     $reflector = new \ReflectionClass(ClassLoader::class);
-    $vendorPath = preg_replace('/^(.*)\/composer\/ClassLoader\.php$/', '$1', $reflector->getFileName() );
+
+    // unix, linux, mac
+    if (DIRECTORY_SEPARATOR == '/') {
+        $vendorPath = preg_replace('/^(.*)\/composer\/ClassLoader\.php$/', '$1', $reflector->getFileName() );
+    }
+
+    // windows
+    if (DIRECTORY_SEPARATOR == '\\') {
+        $vendorPath = preg_replace('/^(.*)\\composer\\ClassLoader\.php$/', '$1', $reflector->getFileName() );
+    }
+
     if($vendorPath && is_dir($vendorPath)) {
         $dotenv->load($vendorPath . '/../.env');
     }
