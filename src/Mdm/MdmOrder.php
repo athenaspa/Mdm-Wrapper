@@ -16,7 +16,7 @@ class MdmOrder extends MdmBase implements MdmInterface
      */
     public function getMdmApi()
     {
-        return new OrderApi($this->getHttpClient(), $this->config);
+        return new OrderApi($this->getHttpClient());
     }
 
 }

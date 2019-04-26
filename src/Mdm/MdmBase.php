@@ -7,7 +7,6 @@ use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleRetry\GuzzleRetryMiddleware;
 use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
 use Swagger\Client\Model\TokenRequest;
 use Swagger\Client\Api\AuthApi;
 
@@ -29,38 +28,15 @@ class MdmBase
     static $accessToken;
 
     /**
-     * @var Configuration
-     */
-    protected $config;
-
-    /**
-     * MdmService constructor.
-     */
-    public function __construct()
-    {
-        $this->config = $this->getConfig();
-    }
-
-    /**
-     * @return Configuration
-     */
-    public function getConfig()
-    {
-        if (empty($this->config)) {
-            $config = new Configuration();
-            $config->setHost(getenv('HOST'));
-            $this->config = $config;
-        }
-        return $this->config;
-    }
-
-    /**
      * @return string
      * @throws ApiException
      */
     public function getAccessToken()
     {
         if (empty(self::$accessToken)) {
+            $http_client = new HttpClient([
+                'base_uri' => getenv('HOST')
+            ]);
             $token_request = new TokenRequest();
             $token_request
                 ->setGrantType('password_grant')
@@ -69,8 +45,7 @@ class MdmBase
                 ->setEmail(getenv('EMAIL'))
                 ->setPassword(getenv('PASSWORD'));
 
-            $auth_instance = new AuthApi();
-            $auth_instance->getConfig()->setHost(getenv('HOST'));
+            $auth_instance = new AuthApi($http_client);
             $token = $auth_instance->authTokenPost($token_request);
             self::$accessToken = $token->getAccessToken();
         }
@@ -97,6 +72,7 @@ class MdmBase
 
         return new HttpClient(
             [
+                'base_uri' => getenv('HOST'),
                 'handler' => $handlerStack,
                 'headers' => [
                     'Accept' => 'application/json',

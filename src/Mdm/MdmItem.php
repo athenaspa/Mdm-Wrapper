@@ -24,7 +24,7 @@ class MdmItem extends MdmBase implements MdmInterface
      */
     public function getMdmApi()
     {
-        return new ItemApi($this->getHttpClient(), $this->config);
+        return new ItemApi($this->getHttpClient());
     }
 
     /**

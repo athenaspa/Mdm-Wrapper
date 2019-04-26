@@ -16,7 +16,7 @@ class MdmUser extends MdmBase implements MdmInterface
      */
     public function getMdmApi()
     {
-        return new UserApi($this->getHttpClient(), $this->config);
+        return new UserApi($this->getHttpClient());
     }
     
 }
