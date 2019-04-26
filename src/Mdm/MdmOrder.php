@@ -3,6 +3,7 @@
 namespace Athena\Mdm;
 
 use Swagger\Client\Api\OrderApi;
+use Swagger\Client\ApiException;
 
 /**
  * Class MdmOrder
@@ -11,12 +12,12 @@ use Swagger\Client\Api\OrderApi;
 class MdmOrder extends MdmBase implements MdmInterface
 {
     /**
-     * @return \Swagger\Client\Api\OrderApi
-     * @throws \Swagger\Client\ApiException
+     * @return OrderApi
+     * @throws ApiException
      */
     public function getMdmApi()
     {
-        return new OrderApi($this->getHttpClient());
+        return new OrderApi($this->getHttpClient(), $this->getConfig());
     }
 
 }

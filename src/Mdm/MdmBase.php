@@ -7,6 +7,7 @@ use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleRetry\GuzzleRetryMiddleware;
 use Swagger\Client\ApiException;
+use Swagger\Client\Configuration;
 use Swagger\Client\Model\TokenRequest;
 use Swagger\Client\Api\AuthApi;
 
@@ -26,6 +27,16 @@ class MdmBase
      * @var string
      */
     static $accessToken;
+
+    /**
+     * @return Configuration
+     */
+    public function getConfig()
+    {
+        $config = new Configuration();
+        $config->setHost(getenv('HOST'));
+        return $config;
+    }
 
     /**
      * @return string
