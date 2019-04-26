@@ -56,7 +56,7 @@ class MdmBase
                 ->setEmail(getenv('EMAIL'))
                 ->setPassword(getenv('PASSWORD'));
 
-            $auth_instance = new AuthApi($http_client);
+            $auth_instance = new AuthApi($http_client, $this->getConfig());
             $token = $auth_instance->authTokenPost($token_request);
             self::$accessToken = $token->getAccessToken();
         }
